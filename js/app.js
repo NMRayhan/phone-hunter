@@ -1,10 +1,20 @@
 const moreMobileBtn = document.getElementById('allProductBtn');
 moreMobileBtn.style.display = 'none';
 
+// By-default autoload this Mobile
+function autoLoad() {
+  const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => SearchCheck(data));
+}
+autoLoad();
+
 // enter key event
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
-    loading('block')
+    toggleSpinner('block');
+    toggleSearchResult('none')
     document.getElementById('card-section').style.display = 'none'
     searchMobile();
   }
@@ -19,22 +29,14 @@ const SearchCheck = (data) => {
     document.getElementById("alert").style.display = "block";
     const cardContainer = document.getElementById("card-container");
     cardContainer.textContent = "";
-    loading('none');
+    toggleSpinner('none');
   }
 };
 
-// By-default autoload this Mobile
-function autoLoad() {
-  const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => SearchCheck(data));
-}
-autoLoad();
-
 // button event handler
 const searchMobile = async() => {
-  loading('block');
+  toggleSpinner('block');
+  toggleSearchResult('none')
   document.getElementById('card-section').style.display = 'none'
   const search = document.getElementById("search-field");
   const text = search.value;
@@ -72,8 +74,9 @@ const loadDataInCard = (mobiles) => {
     cardContainer.appendChild(cardCol);
   }
   moreMobileBtn.style.display = 'block';
-  loading('none');
   document.getElementById('card-section').style.display = 'block';
+  toggleSearchResult('block');
+  toggleSpinner('none');
 };
 
 // more button handler
@@ -135,6 +138,11 @@ const sensorListCreating = (data) =>{
 }
 
 // spinner Function
-const loading = (spinnerValue) =>{
-    document.getElementById('spinner').style.display = spinnerValue;
+const toggleSpinner = (spinnerStyle) =>{
+    document.getElementById('spinner').style.display = spinnerStyle;
+}
+
+// spinner Function
+const toggleSearchResult = (value) =>{
+  document.getElementById('card-section').style.display = value;
 }
