@@ -33,7 +33,7 @@ function autoLoad() {
 autoLoad();
 
 // button event handler
-const searchMobile = () => {
+const searchMobile = async() => {
   loading('block');
   document.getElementById('card-section').style.display = 'none'
   const search = document.getElementById("search-field");
@@ -41,18 +41,22 @@ const searchMobile = () => {
   const url = `https://openapi.programming-hero.com/api/phones?search=${text}`;
   search.value = "";
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => SearchCheck(data));
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    SearchCheck(data)
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // load data in card
 const loadDataInCard = (mobiles) => {
-  let varify = mobiles.slice(0,20);
+  let sliced = mobiles.slice(0,20);
   console.log(mobiles);
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
-  for (const mobile of varify) {
+  for (const mobile of sliced) {
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-lg-4", "col-md-4", "col-sm-12", "mt-5");
     cardCol.innerHTML = `
@@ -128,12 +132,6 @@ const sensorListCreating = (data) =>{
         sensorUl.appendChild(sensorLi);
     }
     return sensorUl;
-}
-
-// load all product 
-const loadAllProduct = () =>{
-  // loadDataInCard();
-  console.log("All data load");
 }
 
 // spinner Function
