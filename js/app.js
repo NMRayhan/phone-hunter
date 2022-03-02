@@ -55,7 +55,7 @@ const searchMobile = async() => {
 // load data in card
 const loadDataInCard = (mobiles) => {
   let sliced = mobiles.slice(0,20);
-  console.log(mobiles);
+  // console.log(mobiles);
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   for (const mobile of sliced) {
