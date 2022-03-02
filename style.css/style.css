@@ -1,0 +1,21 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Hubballi", cursive;
+  color: cadetblue;
+  font-weight: 400;
+}
+
+.card-img {
+  height: 350px;
+  width: 200px;
+}
+
+.logo{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: crimson !important;
+  font-size: 2em !important;
+}
