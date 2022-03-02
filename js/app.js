@@ -109,12 +109,15 @@ const moreDetails = (Details) =>{
 
     ${Details.others ? `
     <h2 class="text-center text-capitalize" style="color:gray">Specification</h2>
-    <h5><i class="fas fa-check text-primary"></i> Bluetooth : <span>${Details.others?.Bluetooth}</span></h5>
-    <h5><i class="fas fa-check text-primary"></i> GPS : <span>${Details.others?.GPS}</span></h5>
-    <h5><i class="fas fa-check text-primary"></i> NFC : <span>${Details.others?.NFC}</span></h5>
-    <h5><i class="fas fa-check text-primary"></i> Radio : <span>${Details.others?.Radio}</span></h5>
-    <h5><i class="fas fa-check text-primary"></i> USB : <span>${Details.others?.USB}</span></h5>
-    <h5><i class="fas fa-check text-primary"></i> WLAN : <span>${Details.others?.WLAN}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> Bluetooth : <span>${Details.others.Bluetooth}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> GPS : <span>${Details.others.GPS}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> NFC : <span>${Details.others.NFC}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> Radio : <span>${Details.others.Radio}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> USB : <span>${Details.others.USB}</span></h5>
+    <h5><i class="fas fa-check text-primary"></i> WLAN : <span>${Details.others.WLAN}</span></h5>
+    <hr>
+    <h2 class="text-center text-capitalize" style="color:gray">Sensor List</h2>
+    ${document.createElement('div').innerHTML = sensorListCreating(Details.mainFeatures.sensors).innerHTML}
     ` : `
     <h2 class="text-center text-capitalize" style="color:gray">Sensor List</h2>
         ${document.createElement('div').innerHTML = sensorListCreating(Details.mainFeatures.sensors).innerHTML}
