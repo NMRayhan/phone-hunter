@@ -28,6 +28,7 @@ autoLoad();
 
 // button event handler
 const searchMobile = () => {
+    loading('block');
   const search = document.getElementById("search-field");
   const text = search.value;
   const url = `https://openapi.programming-hero.com/api/phones?search=${text}`;
@@ -57,6 +58,7 @@ const loadDataInCard = (mobiles) => {
             </div>`;
     cardContainer.appendChild(cardCol);
   }
+  loading('none');
 };
 
 // more button handler
@@ -70,7 +72,7 @@ const moreBtnHandler = (id) => {
 
 // moreDetails Showing 
 const moreDetails = (Details) =>{
-    // console.log(Details);
+    console.log(Details);
     document.getElementById('exampleModalLabel').innerText = Details.name
     const modalContainer = document.getElementById('modal-body')
     modalContainer.textContent = ''
@@ -105,6 +107,8 @@ const moreDetails = (Details) =>{
     modalContainer.appendChild(modalBody);
 }
 
+
+// sensor list create function 
 const sensorListCreating = (data) =>{
     const sensorUl = document.createElement('ul');
     for (let i = 0; i < data.length; i++) {
@@ -114,4 +118,9 @@ const sensorListCreating = (data) =>{
         sensorUl.appendChild(sensorLi);
     }
     return sensorUl;
+}
+
+// spinner Function
+const loading = (spinnerValue) =>{
+    document.getElementById('spinner').style.display = spinnerValue;
 }

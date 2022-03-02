@@ -35,3 +35,7 @@ li:before {
 #alert{
   display: none;
 }
+
+#spinner{
+  display: none;
+}
