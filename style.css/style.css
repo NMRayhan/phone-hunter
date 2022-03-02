@@ -3,10 +3,23 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6{
   font-family: "Hubballi", cursive;
   color: cadetblue;
   font-weight: 400;
+}
+li {
+  list-style: none;
+  font-family: "Hubballi", cursive;
+  color: cadetblue;
+  font-weight: 500;
+  font-size: 1.4em;
+}
+
+li:before {
+  content: '✓';
+  color: #0D6EFD;
+  font-weight: 500;
 }
 
 .card-img {
