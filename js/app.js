@@ -19,7 +19,7 @@ const SearchCheck = (data) => {
 
 // By-default autoload this Mobile
 function autoLoad() {
-  const url = `https://openapi.programming-hero.com/api/phones?search=mi`;
+  const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => SearchCheck(data));
@@ -28,7 +28,6 @@ autoLoad();
 
 // button event handler
 const searchMobile = () => {
-    loading('block');
   const search = document.getElementById("search-field");
   const text = search.value;
   const url = `https://openapi.programming-hero.com/api/phones?search=${text}`;
@@ -41,10 +40,11 @@ const searchMobile = () => {
 
 // load data in card
 const loadDataInCard = (mobiles) => {
-//   console.log(mobiles);
+  const sliced = mobiles.slice(0,20);
+  console.log(sliced);
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
-  for (const mobile of mobiles) {
+  for (const mobile of sliced) {
     // console.log(mobile);
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-lg-4", "col-md-4", "col-sm-12", "mt-5");
@@ -58,7 +58,6 @@ const loadDataInCard = (mobiles) => {
             </div>`;
     cardContainer.appendChild(cardCol);
   }
-  loading('none');
 };
 
 // more button handler
