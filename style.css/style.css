@@ -19,3 +19,6 @@ h6 {
   color: crimson !important;
   font-size: 2em !important;
 }
+#alert{
+  display: none;
+}

@@ -5,12 +5,24 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+// error handle
+const SearchCheck = (data) => {
+  if (data.status == true) {
+    document.getElementById("alert").style.display = "none";
+    loadDataInCard(data.data);
+  } else {
+    document.getElementById("alert").style.display = "block";
+    const cardContainer = document.getElementById("card-container");
+    cardContainer.textContent = "";
+  }
+};
+
 // By-default autoload this Mobile
 function autoLoad() {
   const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => loadDataInCard(data.data));
+    .then((data) => SearchCheck(data));
 }
 autoLoad();
 
@@ -23,11 +35,12 @@ const searchMobile = () => {
 
   fetch(url)
     .then((res) => res.json())
-    .then((data) => loadDataInCard(data.data));
+    .then((data) => SearchCheck(data));
 };
 
 // load data in card
 const loadDataInCard = (mobiles) => {
+  console.log(mobiles);
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   for (const mobile of mobiles) {
@@ -41,7 +54,7 @@ const loadDataInCard = (mobiles) => {
                     <h2 class="cart-text"> <span class="text-success fw-bold">Brand :</span> ${mobile.brand}</h2>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-outline-primary" onclick="moreDetails('${mobile.slug}')">Show Details</button>
+                    <button class="btn btn-outline-primary" onclick="moreDetails('${mobile.slug}')">More Details</button>
                 </div>
             </div>`;
     cardContainer.appendChild(cardCol);
