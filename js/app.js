@@ -1,6 +1,11 @@
+const moreMobileBtn = document.getElementById('allProductBtn');
+moreMobileBtn.style.display = 'none';
+
 // enter key event
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
+    loading('block')
+    document.getElementById('card-section').style.display = 'none'
     searchMobile();
   }
 });
@@ -14,6 +19,7 @@ const SearchCheck = (data) => {
     document.getElementById("alert").style.display = "block";
     const cardContainer = document.getElementById("card-container");
     cardContainer.textContent = "";
+    loading('none');
   }
 };
 
@@ -28,6 +34,8 @@ autoLoad();
 
 // button event handler
 const searchMobile = () => {
+  loading('block');
+  document.getElementById('card-section').style.display = 'none'
   const search = document.getElementById("search-field");
   const text = search.value;
   const url = `https://openapi.programming-hero.com/api/phones?search=${text}`;
@@ -45,23 +53,27 @@ const loadDataInCard = (mobiles) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   for (const mobile of sliced) {
-    // console.log(mobile);
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-lg-4", "col-md-4", "col-sm-12", "mt-5");
-    cardCol.innerHTML = `<div class="card shadow p-2 bg-body rounded" style="background-color: #69696917; min-height : 570px">
-            <img src="${mobile.image}" alt="s" class="card-img-top card-img">
-                <div class="card-body">
-                    <h2 class="cart-title"> <span class="text-warning fw-bold">Name :</span> ${mobile.phone_name}</h2>
-                    <h2 class="cart-text"> <span class="text-success fw-bold">Brand :</span> ${mobile.brand}</h2>
-                    <button type="button" class="btn btn-outline-secondary" onclick="moreBtnHandler('${mobile.slug}')" data-bs-toggle="modal" data-bs-target="#exampleModal">More Details</button>
-                </div>
-            </div>`;
+    cardCol.innerHTML = `
+    <div class="card shadow p-2 bg-body rounded" style="background-color: #69696917; min-height : 570px">
+    <img src="${mobile.image}" alt="s" class="card-img-top card-img">
+      <div class="card-body">
+        <h2 class="cart-title"> <span class="text-warning fw-bold">Name :</span> ${mobile.phone_name}</h2>
+        <h2 class="cart-text"> <span class="text-success fw-bold">Brand :</span> ${mobile.brand}</h2>
+        <button type="button" class="btn btn-outline-secondary" onclick="moreDetailsBtnHandler('${mobile.slug}')" data-bs-toggle="modal" data-bs-target="#exampleModal">More Details</button>
+      </div>
+    </div>        
+    `;
     cardContainer.appendChild(cardCol);
   }
+  moreMobileBtn.style.display = 'block';
+  loading('none');
+  document.getElementById('card-section').style.display = 'block';
 };
 
 // more button handler
-const moreBtnHandler = (id) => {
+const moreDetailsBtnHandler = (id) => {
   const url = `https://openapi.programming-hero.com/api/phone/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -117,6 +129,11 @@ const sensorListCreating = (data) =>{
         sensorUl.appendChild(sensorLi);
     }
     return sensorUl;
+}
+
+// load all product 
+const loadAllProduct = () =>{
+  loadDataInCard("load all Product");
 }
 
 // spinner Function
