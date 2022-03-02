@@ -29,8 +29,9 @@ li:before {
 
 .logo{
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color: crimson !important;
+  color: teal !important;
   font-size: 2em !important;
+  font-weight: 700;
 }
 #alert{
   display: none;
@@ -47,4 +48,10 @@ li:before {
 #card:hover .card-img{
   transform: scale(1.1);
   transition: all .2s ease-in-out; 
+}
+.header-bg-500{
+  background-color: darkgrey;
+}
+.header-bg-400{
+  background-color: rgb(104, 103, 103);
 }
