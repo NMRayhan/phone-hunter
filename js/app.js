@@ -48,15 +48,15 @@ const searchMobile = () => {
 
 // load data in card
 const loadDataInCard = (mobiles) => {
-  const sliced = mobiles.slice(0,20);
-  console.log(sliced);
+  let varify = mobiles.slice(0,20);
+  console.log(mobiles);
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
-  for (const mobile of sliced) {
+  for (const mobile of varify) {
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-lg-4", "col-md-4", "col-sm-12", "mt-5");
     cardCol.innerHTML = `
-    <div class="card shadow p-2 bg-body rounded" style="background-color: #69696917; min-height : 570px">
+    <div class="card shadow p-2 bg-body rounded" style="background-color: #69696917; min-height : 570px" id="card">
     <img src="${mobile.image}" alt="s" class="card-img-top card-img">
       <div class="card-body">
         <h2 class="cart-title"> <span class="text-warning fw-bold">Name :</span> ${mobile.phone_name}</h2>
@@ -108,7 +108,6 @@ const moreDetails = (Details) =>{
     <h5><i class="fas fa-check text-primary"></i> Radio : <span>${Details.others?.Radio}</span></h5>
     <h5><i class="fas fa-check text-primary"></i> USB : <span>${Details.others?.USB}</span></h5>
     <h5><i class="fas fa-check text-primary"></i> WLAN : <span>${Details.others?.WLAN}</span></h5>
-    <hr>
     ` : `
     <h2 class="text-center text-capitalize" style="color:gray">Sensor List</h2>
         ${document.createElement('div').innerHTML = sensorListCreating(Details.mainFeatures.sensors).innerHTML}
@@ -133,7 +132,8 @@ const sensorListCreating = (data) =>{
 
 // load all product 
 const loadAllProduct = () =>{
-  loadDataInCard("load all Product");
+  // loadDataInCard();
+  console.log("All data load");
 }
 
 // spinner Function
